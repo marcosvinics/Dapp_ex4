@@ -1,59 +1,44 @@
-# `to_do`
+# **Exercício 4**
 
-Welcome to your new `to_do` project and to the Internet Computer development community. By default, creating a new project adds this README and some template files to your project directory. You can edit these template files to customize your project and to include your own code to speed up the development cycle.
+**Exercício 4**
 
-To get started, you might want to explore the project directory structure and the default configuration file. Working with this project in your development environment will not affect any production deployment or identity tokens.
+Neste exercício, você irá evoluir o DAPP que desenvolvemos na aula anterior, adicionando novas funcionalidades para aprimorar a interação entre o frontend e o backend. O objetivo é praticar a integração dessas duas camadas, consolidando seus conhecimentos em desenvolvimento full-stack na blockchain Internet Computer (ICP).
 
-To learn more before you start working with `to_do`, see the following documentation available online:
+Instruções:
 
-- [Quick Start](https://internetcomputer.org/docs/current/developer-docs/setup/deploy-locally)
-- [SDK Developer Tools](https://internetcomputer.org/docs/current/developer-docs/setup/install)
-- [Motoko Programming Language Guide](https://internetcomputer.org/docs/current/motoko/main/motoko)
-- [Motoko Language Quick Reference](https://internetcomputer.org/docs/current/motoko/main/language-manual)
+## **Listar Total de "Tarefas em Andamento"**
 
-If you want to start working on your project right away, you might want to try the following commands:
+- Adicionar um totalizador ao final da lista de **tarefas em andamento**. Este totalizador deverá apresentar a quantidade de tarefas que estão em andamento, conforme ilustrado na imagem abaixo.
+    
+    ![](https://aprendaicp.xyz/exercicio1_4i1.jpg)
+    
+- Crie uma função no frontend chamada `totalTarefasEmAndamento` esta função deverá realizar uma chamada para a função `totalTarefasEmAndamento` que será adicionada ao backend. O número retornado por esta função deverá ser apresentado na tela no campo **TOTAL** (da lista de tarefas em andamento).
+- Crie uma função no backend chamada `totalTarefasEmAndamento`. Esta função deve retornar a quantidade de tarefas presentes no **Buffer** `tarefas` que possuem o atributo `concluida` definido como **false**. O retorno deverá ser do tipo `Nat`.
+- No frontend a função `totalTarefasEmAndamento` deverá ser chamada sempre`useEffect` for executado.
+- No frontend a função `totalTarefasEmAndamento` deverá ser chamada sempre uma tarefa for incluída, excluida ou concluída.
 
-```bash
-cd to_do/
-dfx help
-dfx canister --help
-```
+## **Listar Total de Tarefas "Concluídas"**
 
-## Running the project locally
+- Adicionar um totalizador ao final da lista de **tarefas concluídas**. Este totalizador deverá apresentar a quantidade de tarefas que estão concluídas, conforme ilustrado na imagem abaixo.
+    
+    ![](https://aprendaicp.xyz/exercicio1_4i2.jpg)
+    
+- Crie uma função no frontend chamada `totalTarefasConcluidas` esta função deverá realizar uma chamada para a função `totalTarefasConcluidas` que será adicionada ao backend. O número retornado por esta função deverá ser apresentado na tela no campo **TOTAL** (da lista de tarefas concluídas).
+- Crie uma função no backend chamada `totalTarefasConcluidas`. Esta função deve retornar a quantidade de tarefas presentes no **Buffer** `tarefas` que possuem o atributo `concluida` definido como **true**. O retorno deverá ser do tipo `Nat`.
+- No frontend a função `totalTarefasConcluidas` deverá ser chamada sempre`useEffect` for executado.
+- No frontend a função `totalTarefasConcluidas` deverá ser chamada sempre uma tarefa for concluída.
 
-If you want to test your project locally, you can use the following commands:
+## **Publicação do DAPP**
 
-```bash
-# Starts the replica, running in the background
-dfx start --background
+- Após concluir o desenvolvimento, publique o código-fonte do DAPP no seu **GitHub**.
+- Preencha o campo **GitHub** (abaixo) com o link do repositório e clique em **Enviar**.
 
-# Deploys your canisters to the replica and generates your candid interface
-dfx deploy
-```
+### **Dicas:**
 
-Once the job completes, your application will be available at `http://localhost:4943?canisterId={asset_canister_id}`.
-
-If you have made changes to your backend canister, you can generate a new candid interface with
-
-```bash
-npm run generate
-```
-
-at any time. This is recommended before starting the frontend development server, and will be run automatically any time you run `dfx deploy`.
-
-If you are making frontend changes, you can start a development server with
-
-```bash
-npm start
-```
-
-Which will start a server at `http://localhost:8080`, proxying API requests to the replica at port 4943.
-
-### Note on frontend environment variables
-
-If you are hosting frontend code somewhere without using DFX, you may need to make one of the following adjustments to ensure your project does not fetch the root key in production:
-
-- set`DFX_NETWORK` to `ic` if you are using Webpack
-- use your own preferred method to replace `process.env.DFX_NETWORK` in the autogenerated declarations
-  - Setting `canisters -> {asset_canister_id} -> declarations -> env_override to a string` in `dfx.json` will replace `process.env.DFX_NETWORK` with the string in the autogenerated declarations
-- Write your own `createActor` constructor
+- Uma alternativa para implementar as funções `totalTarefasEmAndamento` e `totalTarefasConcluidas` no backend, para contagem das terafas (em andamento/concluídas) é utilizar uma estrutura **for**, como por exemplo: `for( value in tarefas.vals() )`. Neste caso você poderá ser acessar o valor dos atributos conforme este exemplo: `value.categoria` (neste caso estamos obtendo o valor de categoria). Outra alternativa é pesquisar uma função da biblioteca **Buffer** que permita filtrar itens de acordo com os critérios que você definir, e em seguida contar a quantidade de registros retornados, no final da aula  é apresentada uma lista de funções de **Buffer** que podem ser estudadas.
+    
+    Estrutura de dados Buffer
+    
+- No frontend ao receber o retorno do backend utilize a função `parseInt` do JavaScript para evitar qualquer tipo de incompatibilidade do dado recebido, exemplo: `parseInt(await to_do_backend.totalTarefasEmAndamento())`.
+- Certifique-se de que o código está bem organizado e comentado.
+- Teste as funções localmente antes de publicar o DAPP. Utilize o comando `dfx deploy` para gerar o Dapp localmente, e utilize a URL correspondente a interface de frontend para realizar os testes em um navegador web.
