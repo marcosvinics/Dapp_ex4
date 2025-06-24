@@ -73,13 +73,41 @@ actor {
         tarefas.put(i,t);
       }
     };
-
+    
   };
 
   // Função para retornar os itens do buffer 'tarefas'.
   public func getTarefas() : async [Tarefa] {
     return Buffer.toArray(tarefas);
-  };  
+  };
 
+  // NOVAS FUNÇÕES ADICIONADAS PARA O EXERCÍCIO 4
 
+  // Função para retornar o total de tarefas em andamento (concluida = false)
+  public func totalTarefasEmAndamento() : async Nat {
+    var contador : Nat = 0;
+    
+    // Utilizando estrutura for para percorrer todas as tarefas
+    for (value in tarefas.vals()) {
+      if (not value.concluida) {
+        contador += 1;
+      }
+    };
+    
+    return contador;
+  };
+
+  // Função para retornar o total de tarefas concluídas (concluida = true)
+  public func totalTarefasConcluidas() : async Nat {
+    var contador : Nat = 0;
+    
+    // Utilizando estrutura for para percorrer todas as tarefas
+    for (value in tarefas.vals()) {
+      if (value.concluida) {
+        contador += 1;
+      }
+    };
+    
+    return contador;
+  };
 };
